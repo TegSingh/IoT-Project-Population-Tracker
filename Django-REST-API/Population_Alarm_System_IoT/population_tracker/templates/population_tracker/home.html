@@ -1,0 +1,31 @@
+{% extends "population_tracker/base.html" %}
+{% block content %}
+    <div class="row d-flex justify-content-center flex-nowrap">
+        <h3>Current occupancy</h3>
+    </div>
+    <div class="row d-flex justify-content-center flex-nowrap">
+        <h1 style="height: 100px;">{{ population }}</h1>
+    </div>
+    <div>
+        <table class="table">
+            <thead class="thead-dark">
+                <th scope="col">Person</th>
+                <th scope="col">Distance from Sensor</th>
+                <th scope="col">Time Entered</th>
+                <th scope="col">Action</th>
+            </thead>
+            <tbody>
+                {% for item in Sensor_data %}
+                <tr>
+                    <td>{{ item.person_number }}</td>
+                    <td>{{ item.distance }}</td>
+                    <td>{{ item.timestamp }}</td>
+                    <td>
+                        <a class="btn btn-primary" href="{% url 'sensor_data_delete' item.person_number %}">Delete</a>
+                    </td>
+                </tr>
+                    {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}    
